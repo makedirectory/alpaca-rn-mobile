@@ -39,6 +39,8 @@
 		2DCD954D1E0B4F2C00145EB5 /* mobileAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* mobileAppTests.m */; };
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		463C293CE8D2413A8BDC0BC2 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 649F9250EC644611A3812C36 /* libRNGestureHandler.a */; };
+		71BF13442385B6AC0070A67C /* AlpacaOAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71BF13432385B6AC0070A67C /* AlpacaOAuth.swift */; };
+		71BF13882385B9430070A67C /* AlpacaOAuth.m in Sources */ = {isa = PBXBuildFile; fileRef = 71BF13872385B9430070A67C /* AlpacaOAuth.m */; };
 		7D4F6B689717430BAC83163F /* libPods-mobileApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C646E6BCE8A568B6EBD0AD4C /* libPods-mobileApp.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8A01C53659714062A277DCD1 /* libRNAppAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7D4BF689A6614D25915EDD93 /* libRNAppAuth.a */; };
@@ -386,6 +388,9 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		649F9250EC644611A3812C36 /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		66B27D4325974C55B191B9B2 /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
+		71BF13422385B6AC0070A67C /* mobileApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mobileApp-Bridging-Header.h"; sourceTree = "<group>"; };
+		71BF13432385B6AC0070A67C /* AlpacaOAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AlpacaOAuth.swift; path = mobileApp/AlpacaOAuth.swift; sourceTree = "<group>"; };
+		71BF13872385B9430070A67C /* AlpacaOAuth.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AlpacaOAuth.m; path = mobileApp/AlpacaOAuth.m; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7D4BF689A6614D25915EDD93 /* libRNAppAuth.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAppAuth.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
@@ -550,6 +555,9 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				71BF13432385B6AC0070A67C /* AlpacaOAuth.swift */,
+				71BF13422385B6AC0070A67C /* mobileApp-Bridging-Header.h */,
+				71BF13872385B9430070A67C /* AlpacaOAuth.m */,
 			);
 			name = mobileApp;
 			sourceTree = "<group>";
@@ -817,6 +825,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1316,6 +1325,8 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				71BF13442385B6AC0070A67C /* AlpacaOAuth.swift in Sources */,
+				71BF13882385B9430070A67C /* AlpacaOAuth.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1367,6 +1378,7 @@
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1402,6 +1414,7 @@
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				HEADER_SEARCH_PATHS = (
@@ -1436,6 +1449,7 @@
 			baseConfigurationReference = 9013EF69E148F21DEC1DF526 /* Pods-mobileApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
@@ -1448,7 +1462,7 @@
 					"$(SRCROOT)/../node_modules/react-native-app-auth/ios",
 				);
 				INFOPLIST_FILE = mobileApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1458,6 +1472,9 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.alpaca.markets;
 				PRODUCT_NAME = mobileApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "mobileApp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1467,6 +1484,7 @@
 			baseConfigurationReference = A4B1DAADA44372F4DB132E79 /* Pods-mobileApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1479,7 +1497,7 @@
 					"$(SRCROOT)/../node_modules/react-native-app-auth/ios",
 				);
 				INFOPLIST_FILE = mobileApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1489,6 +1507,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = app.alpaca.markets;
 				PRODUCT_NAME = mobileApp;
 				PROVISIONING_PROFILE_SPECIFIER = AlpacaAppStore;
+				SWIFT_OBJC_BRIDGING_HEADER = "mobileApp-Bridging-Header.h";
+				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
