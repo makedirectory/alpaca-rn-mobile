@@ -9,7 +9,10 @@ import { PositionsTypes } from '../Redux/PositionsRedux'
 import { AssetsTypes } from '../Redux/AssetsRedux'
 
 /* ------------- Sagas ------------- */
-import { appStartAttempt } from './AppSaga'
+import {
+    appStartAttempt,
+    exchangeTokenAttempt
+} from './AppSaga'
 import {
     getAccountAttempt,
     configureAccountAttempt
@@ -32,6 +35,7 @@ const api = API.create()
 export default function* root() {
     yield [
         takeLatest(AppTypes.APP_START_ATTEMPT, appStartAttempt, api),
+        takeLatest(AppTypes.EXCHANGE_TOKEN_ATTEMPT, exchangeTokenAttempt, api),
         takeLatest(AccountTypes.GET_ACCOUNT_ATTEMPT, getAccountAttempt, api),
         takeLatest(AccountTypes.CONFIGURE_ACCOUNT_ATTEMPT, configureAccountAttempt, api),
         takeEvery(OrdersTypes.GET_ORDERS_ATTEMPT, getOrdersAttempt, api),
