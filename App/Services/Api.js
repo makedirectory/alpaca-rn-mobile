@@ -8,8 +8,6 @@ const create = (baseURL = config.BASE_URL) => {
     const api = apisauce.create({
         baseURL,
         headers: {
-			'APCA-API-KEY-ID': config.APCA_API_KEY_ID,
-			'APCA-API-SECRET-KEY': config.APCA_API_SECRET_KEY,
 		},
         timeout: 25000
     })
@@ -17,8 +15,6 @@ const create = (baseURL = config.BASE_URL) => {
     const dataApi = apisauce.create({
         baseURL: config.DATA_BASE_URL,
         headers: {
-			'APCA-API-KEY-ID': config.APCA_API_KEY_ID,
-			'APCA-API-SECRET-KEY': config.APCA_API_SECRET_KEY,
 		},
         timeout: 50000
     })
@@ -33,14 +29,12 @@ const create = (baseURL = config.BASE_URL) => {
     })
 
     const setBaseURL = url => api.setBaseURL(url)
-    const setHeaders = (apiKey, secretKey) => {
+    const setHeaders = (access_token) => {
         api.setHeaders({
-            'APCA-API-KEY-ID': apiKey,
-            'APCA-API-SECRET-KEY': secretKey,
+            'Authorization': 'Bearer ' + access_token
         })
         dataApi.setHeaders({
-            'APCA-API-KEY-ID': apiKey,
-            'APCA-API-SECRET-KEY': secretKey,
+            'Authorization': 'Bearer ' + access_token
         })
     }
     const getAccount = () => api.get('v2/account')

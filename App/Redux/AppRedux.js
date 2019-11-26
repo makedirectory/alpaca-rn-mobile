@@ -14,7 +14,7 @@ export default Creators
 
 /* ------------- Initial State ------------- */
 export const INITIAL_STATE = Immutable({
-    fetching: true,
+    fetching: false,
     errorMessage: '',
     error: false
 })
@@ -40,4 +40,6 @@ export const exchangeTokenFailure = (state, action) => {
 export const reducer = createReducer(INITIAL_STATE, {
     [Types.APP_START_ATTEMPT]: appStartAttempt,
     [Types.EXCHANGE_TOKEN_ATTEMPT]: exchangeTokenAttempt,
+    [Types.EXCHANGE_TOKEN_SUCCESS]: exchangeTokenSuccess,
+    [Types.EXCHANGE_TOKEN_FAILURE]: exchangeTokenFailure,
 })

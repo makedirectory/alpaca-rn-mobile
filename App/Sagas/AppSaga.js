@@ -14,6 +14,7 @@ export function* exchangeTokenAttempt(api, action) {
         if (response.ok) {
             const { access_token } = response.data
             api.setHeaders(access_token)
+            yield put(AppActions.exchangeTokenSuccess(access_token))
         } else {
             const message = response.data.message || 'Something went wrong'
             yield put(AppActions.exchangeTokenFailure(message))

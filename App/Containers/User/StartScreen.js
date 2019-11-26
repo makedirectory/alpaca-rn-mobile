@@ -15,6 +15,7 @@ import {
 import { size } from '../../Util/Helper'
 import Button from '../../Components/Button'
 import config from '../../config';
+import Loading from '../../Components/Loading';
 
 class StartScreen extends Component {
 
@@ -29,6 +30,12 @@ class StartScreen extends Component {
             redirectUrl: 'alpacamobile://oauth',
             responseType: 'code',
             grantType: 'authorization_code',
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.fetching && !nextProps.fetching) {
+            this.props.navigation.navigate('Tab')
         }
     }
 
@@ -86,6 +93,7 @@ class StartScreen extends Component {
                     height={50}
                     onPress={this.getStarted}
                 />
+                {this.props.fetching && <Loading />}
             </View>
         )
     }
@@ -99,6 +107,7 @@ const styles = {
 }
 
 const mapStateToProps = (state) => ({
+    fetching: state.app.fetching
 })
 
 const mapDispatchToProps = dispatch => ({
