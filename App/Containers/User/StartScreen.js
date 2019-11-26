@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import {
     View,
+    Text,
+    StyleSheet,
     NativeModules
 } from 'react-native'
 import { connect } from 'react-redux'
 import { authorize } from 'react-native-app-auth';
+import RNPickerSelect from 'react-native-picker-select'
 
 import AppActions from '../../Redux/AppRedux'
 import {
@@ -22,6 +25,7 @@ class StartScreen extends Component {
     constructor(props) {
         super(props)
 
+        this.inputRefs = {}
         this.state = {
             clientId: config.AUTH_CLIENT_ID,
             clientSecret: config.AUTH_CLIENT_SECRET,
@@ -30,6 +34,17 @@ class StartScreen extends Component {
             redirectUrl: 'alpacamobile://oauth',
             responseType: 'code',
             grantType: 'authorization_code',
+            baseUrl: config.BASE_URL,
+            baseUrlItems: [
+                {
+                    label: 'https://api.alpaca.markets/',
+                    value: 'https://api.alpaca.markets/',
+                },
+                {
+                    label: config.BASE_URL,
+                    value: config.BASE_URL,
+                },
+            ],
         }
     }
 
@@ -40,10 +55,15 @@ class StartScreen extends Component {
     }
 
     exchangeToken = (url) => {
-        const { redirectUrl, grantType } = this.state;
+        const { redirectUrl, grantType, baseUrl } = this.state;
         const code = this.getCode(url);
 
+        const data = {
+            baseUrl,
+        };
         const config = `grant_type=${grantType}&redirect_uri=${redirectUrl}&code=${code}`;
+
+        this.props.appStartAttempt(data);
         this.props.alpacaExchangeToken(config);
     }
 
@@ -83,8 +103,33 @@ class StartScreen extends Component {
     }
 
     render() {
+        const { baseUrl, baseUrlItems } = this.state
         return (
             <View style={styles.mainContainer}>
+                <View style={styles.rowContainer}>
+                    <Text style={styles.label}>
+                        BASE_URL
+                    </Text>
+                    <RNPickerSelect
+                        placeholder={{
+                            label: '',
+                            value: null,
+                            color: Colors.COLOR_GOLD,
+                        }}
+                        items={baseUrlItems}
+                        onValueChange={(value) => {
+                            this.setState({
+                                baseUrl: value,
+                            })
+                        }}
+                        style={pickerSelectStyles}
+                        useNativeAndroidPickerStyle={false}
+                        value={baseUrl}
+                        ref={(el) => {
+                            this.inputRefs.picker = el
+                        }}
+                    />
+                </View>
                 <Button
                     style={styles.button}
                     label="Get Started"
@@ -101,10 +146,36 @@ class StartScreen extends Component {
 
 const styles = {
     ...ApplicationStyles.screen,
+    rowContainer: {
+        flexDirection: 'column',
+        marginTop: size(150)
+    },
     button: {
-        marginTop: size(300),
+        marginTop: size(100),
     },
 }
+
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+        width: null,
+        fontSize: size(16),
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderBottomColor: Colors.COLOR_GOLD,
+        borderBottomWidth: 1,
+        backgroundColor: 'white',
+        color: Colors.COLOR_GOLD,
+    },
+    inputAndroid: {
+        fontSize: size(16),
+        paddingTop: 10,
+        paddingBottom: 10,
+        borderBottomColor: Colors.COLOR_GOLD,
+        borderBottomWidth: 1,
+        backgroundColor: 'white',
+        color: Colors.COLOR_GOLD,
+    },
+})
 
 const mapStateToProps = (state) => ({
     fetching: state.app.fetching
