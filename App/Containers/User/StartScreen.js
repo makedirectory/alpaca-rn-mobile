@@ -95,7 +95,9 @@ class StartScreen extends Component {
         let webOAuthUrl = `${authorizationEndpoint}?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=${responseType}`;
         NativeModules.AlpacaOAuth.AuthStart(webOAuthUrl).then(url => {
             console.log('auth result', url);
-            this.exchangeToken(url);
+            if (url) {
+                this.exchangeToken(url);
+            }
         })
         .catch((error) => {
             console.log('native auth error:', error);
