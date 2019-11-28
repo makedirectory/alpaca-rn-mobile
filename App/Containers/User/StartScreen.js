@@ -3,6 +3,7 @@ import {
     View,
     Text,
     StyleSheet,
+    AsyncStorage,
     NativeModules
 } from 'react-native'
 import { connect } from 'react-redux'
@@ -48,6 +49,19 @@ class StartScreen extends Component {
         }
     }
 
+    async componentDidMount() {
+        const accessToken = await AsyncStorage.getItem('accessToken');
+        const baseUrl = await AsyncStorage.getItem('baseUrl');
+        if (accessToken) {
+            const data = {
+                baseUrl,
+                accessToken,
+            };
+            this.props.appStartAttempt(data);
+            this.props.navigation.navigate('Tab');
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
         if (this.props.fetching && !nextProps.fetching) {
             this.props.navigation.navigate('Tab')
@@ -63,6 +77,7 @@ class StartScreen extends Component {
         };
         const config = `grant_type=${grantType}&redirect_uri=${redirectUrl}&code=${code}`;
 
+        AsyncStorage.setItem('baseUrl', baseUrl);
         this.props.appStartAttempt(data);
         this.props.alpacaExchangeToken(config);
     }
