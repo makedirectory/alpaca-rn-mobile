@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {
     View,
     Text,
-    Image,
+    AsyncStorage,
 } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
@@ -30,6 +30,11 @@ class EmergencyScreen extends Component {
                 />
             ),
         }
+    }
+
+    logOut = async () => {
+        await AsyncStorage.removeItem("accessToken");
+        this.props.navigation.navigate("Setup");
     }
 
     render() {
@@ -62,6 +67,11 @@ class EmergencyScreen extends Component {
                         label="CANCEL ALL"
                         disabled={openOrders.length === 0}
 						onPress={() => this.props.navigation.navigate('CancelOrder')}
+					/>
+                    <Button
+                        style={styles.button}
+                        label="LOG OUT"
+						onPress={this.logOut}
 					/>
                     <Text
                         style={[styles.label, { marginTop: size(30) }]}
