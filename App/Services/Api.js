@@ -8,14 +8,14 @@ const create = (baseURL = config.BASE_URL) => {
     const api = apisauce.create({
         baseURL,
         headers: {
-		},
+        },
         timeout: 25000
     })
 
     const dataApi = apisauce.create({
         baseURL: config.DATA_BASE_URL,
         headers: {
-		},
+        },
         timeout: 50000
     })
 
@@ -23,8 +23,8 @@ const create = (baseURL = config.BASE_URL) => {
         baseURL: config.TOKEN_ENDPOINT,
         headers: {
             'content-type': 'application/x-www-form-urlencoded',
-			'Authorization': 'Basic ' + base64.encode(`${config.AUTH_CLIENT_ID}:${config.AUTH_CLIENT_SECRET}`)
-		},
+            'Authorization': 'Basic ' + base64.encode(`${config.AUTH_CLIENT_ID}:${config.AUTH_CLIENT_SECRET}`)
+        },
         timeout: 25000
     })
 

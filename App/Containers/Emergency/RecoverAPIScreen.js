@@ -40,13 +40,13 @@ class RecoverAPIScreen extends Component {
         const condition = props.navigation.getParam('condition')
         return {
             headerLeft: condition === 'RECOVERING_API_SUCCESS' ?
-            null :
-            (
-                <NavigationIcon
-                    onPress={() => props.navigation.pop()}
-                    source={Images.back}
-                />
-            )
+                null :
+                (
+                    <NavigationIcon
+                        onPress={() => props.navigation.pop()}
+                        source={Images.back}
+                    />
+                )
         }
     }
 
