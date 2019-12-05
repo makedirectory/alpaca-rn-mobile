@@ -108,6 +108,9 @@ android {
         versionCode 10
         versionName "2.2"
         multiDexEnabled true
+        manifestPlaceholders = [
+                appAuthRedirectScheme: 'alpacamobile'
+        ]
     }
     splits {
         abi {
