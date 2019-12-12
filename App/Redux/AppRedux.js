@@ -14,6 +14,7 @@ export default Creators
 
 /* ------------- Initial State ------------- */
 export const INITIAL_STATE = Immutable({
+    accessToken: null,
     fetching: false,
     errorMessage: '',
     error: false
@@ -29,7 +30,7 @@ export const exchangeTokenAttempt = (state, action) => {
 }
 
 export const exchangeTokenSuccess = (state, action) => {
-    return state.merge({ fetching: false, error: false, errorMessage: '' })
+    return state.merge({ fetching: false, error: false, errorMessage: '', accessToken: action.data })
 }
 
 export const exchangeTokenFailure = (state, action) => {

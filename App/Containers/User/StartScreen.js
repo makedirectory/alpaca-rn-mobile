@@ -38,14 +38,15 @@ class StartScreen extends Component {
             baseUrl: config.BASE_URL,
             baseUrlItems: [
                 {
-                    label: 'https://api.alpaca.markets/',
+                    label: 'Live',
                     value: 'https://api.alpaca.markets/',
                 },
                 {
-                    label: config.BASE_URL,
+                    label: 'Paper',
                     value: config.BASE_URL,
                 },
             ],
+            accessToken: null,
         }
     }
 
@@ -59,26 +60,22 @@ class StartScreen extends Component {
             };
             this.props.appStartAttempt(data);
             this.props.navigation.navigate('Tab');
+        } else {
+            this.authStart();
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.fetching && !nextProps.fetching) {
-            this.props.navigation.navigate('Tab')
+        if (this.props.fetching && !nextProps.fetching && nextProps.accessToken) {
+            this.setState({ accessToken: nextProps.accessToken });
         }
     }
 
     exchangeToken = (url) => {
-        const { redirectUrl, grantType, baseUrl } = this.state;
+        const { redirectUrl, grantType } = this.state;
         const code = this.getCode(url);
-
-        const data = {
-            baseUrl,
-        };
         const config = `grant_type=${grantType}&redirect_uri=${redirectUrl}&code=${code}`;
 
-        AsyncStorage.setItem('baseUrl', baseUrl);
-        this.props.appStartAttempt(data);
         this.props.alpacaExchangeToken(config);
     }
 
@@ -88,7 +85,7 @@ class StartScreen extends Component {
         return code
     }
 
-    getStarted = async () => {
+    authStart = async () => {
         const { clientId, clientSecret, authorizationEndpoint, redirectUrl, responseType, tokenEndpoint } = this.state;
         // const config = {
         //     issuer: authorizationEndpoint,
@@ -119,8 +116,18 @@ class StartScreen extends Component {
         });
     }
 
+    getStarted = () => {
+        const { baseUrl } = this.state;
+        const data = {
+            baseUrl,
+        };
+        AsyncStorage.setItem('baseUrl', baseUrl);
+        this.props.appStartAttempt(data);
+        this.props.navigation.navigate('Tab');
+    }
+
     render() {
-        const { baseUrl, baseUrlItems } = this.state
+        const { baseUrl, baseUrlItems, accessToken } = this.state
         return (
             <View style={styles.mainContainer}>
                 <View style={styles.rowContainer}>
@@ -153,6 +160,7 @@ class StartScreen extends Component {
                     color={Colors.COLOR_NAV_HEADER}
                     labelColor={Colors.WHITE}
                     height={50}
+                    disabled={!accessToken}
                     onPress={this.getStarted}
                 />
                 {this.props.fetching && <Loading />}
@@ -195,7 +203,8 @@ const pickerSelectStyles = StyleSheet.create({
 })
 
 const mapStateToProps = (state) => ({
-    fetching: state.app.fetching
+    fetching: state.app.fetching,
+    accessToken: state.app.accessToken
 })
 
 const mapDispatchToProps = dispatch => ({
