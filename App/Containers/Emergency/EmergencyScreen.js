@@ -34,7 +34,7 @@ class EmergencyScreen extends Component {
 
     logOut = async () => {
         await AsyncStorage.removeItem("accessToken");
-        this.props.navigation.navigate("Setup");
+        this.props.navigation.push("Setup");
     }
 
     render() {

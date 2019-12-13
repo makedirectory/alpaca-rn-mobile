@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {
     View,
     Text,
+    Image,
     StyleSheet,
     AsyncStorage,
     NativeModules
@@ -14,7 +15,7 @@ import AppActions from '../../Redux/AppRedux'
 import {
     ApplicationStyles,
     Colors,
-    Fonts
+    Images
 } from '../../Themes'
 import { size } from '../../Util/Helper'
 import Button from '../../Components/Button'
@@ -38,11 +39,11 @@ class StartScreen extends Component {
             baseUrl: config.BASE_URL,
             baseUrlItems: [
                 {
-                    label: 'Live',
+                    label: 'Live Account',
                     value: 'https://api.alpaca.markets/',
                 },
                 {
-                    label: 'Paper',
+                    label: 'Paper Account',
                     value: config.BASE_URL,
                 },
             ],
@@ -60,8 +61,6 @@ class StartScreen extends Component {
             };
             this.props.appStartAttempt(data);
             this.props.navigation.navigate('Tab');
-        } else {
-            this.authStart();
         }
     }
 
@@ -130,38 +129,45 @@ class StartScreen extends Component {
         const { baseUrl, baseUrlItems, accessToken } = this.state
         return (
             <View style={styles.mainContainer}>
-                <View style={styles.rowContainer}>
-                    <Text style={styles.label}>
-                        BASE_URL
-                    </Text>
-                    <RNPickerSelect
-                        placeholder={{
-                            label: '',
-                            value: null,
-                            color: Colors.COLOR_GOLD,
-                        }}
-                        items={baseUrlItems}
-                        onValueChange={(value) => {
-                            this.setState({
-                                baseUrl: value,
-                            })
-                        }}
-                        style={pickerSelectStyles}
-                        useNativeAndroidPickerStyle={false}
-                        value={baseUrl}
-                        ref={(el) => {
-                            this.inputRefs.picker = el
-                        }}
+                {
+                    accessToken ?
+                    <View style={styles.rowContainer}>
+                        <Text style={styles.label}>
+                            Account
+                        </Text>
+                        <RNPickerSelect
+                            placeholder={{
+                                label: '',
+                                value: null,
+                                color: Colors.COLOR_GOLD,
+                            }}
+                            items={baseUrlItems}
+                            onValueChange={(value) => {
+                                this.setState({
+                                    baseUrl: value,
+                                })
+                            }}
+                            style={pickerSelectStyles}
+                            useNativeAndroidPickerStyle={false}
+                            value={baseUrl}
+                            ref={(el) => {
+                                this.inputRefs.picker = el
+                            }}
+                        />
+                    </View> :
+                    <Image
+                        style={styles.logo}
+                        source={Images.logo}
+                        resizeMode="contain"
                     />
-                </View>
+                }
                 <Button
                     style={styles.button}
-                    label="Get Started"
+                    label={accessToken ? "Get Started" : "Authenticate with Alpaca"}
                     color={Colors.COLOR_NAV_HEADER}
                     labelColor={Colors.WHITE}
                     height={50}
-                    disabled={!accessToken}
-                    onPress={this.getStarted}
+                    onPress={accessToken ? this.getStarted : this.authStart}
                 />
                 {this.props.fetching && <Loading />}
             </View>
@@ -178,6 +184,12 @@ const styles = {
     button: {
         marginTop: size(100),
     },
+    logo: {
+        alignSelf: "center",
+        marginTop: size(100),
+        width: size(200),
+        height: size(200),
+    }
 }
 
 const pickerSelectStyles = StyleSheet.create({
