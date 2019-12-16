@@ -57,7 +57,7 @@ class SearchScreen extends Component {
         const { assets, getBars } = this.props
         const { query } = this.state
 
-        let filteredItems = _.map(assets, function(el) {
+        let filteredItems = _.map(assets, function (el) {
             if (query && el.symbol.toLowerCase().startsWith(query.toLowerCase())) return el
         })
         filteredItems = _.without(filteredItems, undefined)
@@ -71,7 +71,7 @@ class SearchScreen extends Component {
         })
 
         let symbols = ''
-        _.map(filteredItems, function(item) {
+        _.map(filteredItems, function (item) {
             let div = symbols.length > 0 ? ',' : ''
             symbols = symbols + div + item.symbol
         })

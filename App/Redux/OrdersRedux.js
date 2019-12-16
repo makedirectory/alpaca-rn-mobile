@@ -64,7 +64,7 @@ export const cancelOrderAttempt = (state, action) => {
 }
 
 export const cancelOrderSuccess = (state, action) => {
-    return state.merge({ cancelingOrder: false, error: false, errorMessage: ''})
+    return state.merge({ cancelingOrder: false, error: false, errorMessage: '' })
 }
 
 export const cancelOrderFailure = (state, action) => {
