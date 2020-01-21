@@ -30,7 +30,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNAppAuthPackage(),
             new RNCWebViewPackage(),
             new RNGestureHandlerPackage(),
-            new RNSpinkitPackage()
+            new RNSpinkitPackage(),
+            new AlpacaOAuthPackage()
       );
     }
 

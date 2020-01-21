@@ -10,6 +10,7 @@ import {
 import { connect } from 'react-redux'
 import { authorize } from 'react-native-app-auth';
 import RNPickerSelect from 'react-native-picker-select'
+// import base64 from 'react-native-base64'
 
 import AppActions from '../../Redux/AppRedux'
 import {
@@ -86,19 +87,25 @@ class StartScreen extends Component {
 
     authStart = async () => {
         const { clientId, clientSecret, authorizationEndpoint, redirectUrl, responseType, tokenEndpoint } = this.state;
-        // const config = {
+        // const authConfig = {
         //     issuer: authorizationEndpoint,
         //     clientId,
-        //     // clientSecret,
+        //     clientSecret,
         //     redirectUrl,
         //     serviceConfiguration: {
         //         authorizationEndpoint,
-        //         // tokenEndpoint,
+        //         tokenEndpoint,
+        //     },
+        //     customHeaders: {
+        //         token: {
+        //             'Authorization': 'Basic ' + base64.encode(`${config.AUTH_CLIENT_ID}:${config.AUTH_CLIENT_SECRET}`),
+        //         },
         //     },
         // };
+        // console.log("authConfig:", authConfig);
 
         // try {
-        //     const result = await authorize(config);
+        //     const result = await authorize(authConfig);
         //     console.log('auth result', result);
         // } catch (error) {
         //     console.log('auth error', error);
