@@ -105,11 +105,11 @@ android {
         applicationId "app.alpaca.markets"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10
-        versionName "2.2"
+        versionCode 29
+        versionName "3.0"
         multiDexEnabled true
         manifestPlaceholders = [
-                appAuthRedirectScheme: 'alpacamobile'
+                appAuthRedirectScheme: 'test'
         ]
     }
     splits {
@@ -142,6 +142,7 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-custom-tabs')
     implementation project(':react-native-app-auth')
     implementation project(':react-native-webview')
     implementation project(':react-native-gesture-handler')
