@@ -5,11 +5,14 @@ import {
     Image,
     StyleSheet,
     AsyncStorage,
+    Linking,
+    Platform,
     NativeModules
 } from 'react-native'
 import { connect } from 'react-redux'
 import { authorize } from 'react-native-app-auth';
 import RNPickerSelect from 'react-native-picker-select'
+import { CustomTabs } from 'react-native-custom-tabs';
 // import base64 from 'react-native-base64'
 
 import AppActions from '../../Redux/AppRedux'
@@ -53,6 +56,11 @@ class StartScreen extends Component {
     }
 
     async componentDidMount() {
+        if (Platform.OS === 'android') {
+            Linking.getInitialURL().then(url => {
+              this.exchangeToken(url);
+            });
+        }
         const accessToken = await AsyncStorage.getItem('accessToken');
         const baseUrl = await AsyncStorage.getItem('baseUrl');
         if (accessToken) {
@@ -72,6 +80,8 @@ class StartScreen extends Component {
     }
 
     exchangeToken = (url) => {
+        console.log("url:", url);
+        if (!url) return;
         const { redirectUrl, grantType } = this.state;
         const code = this.getCode(url);
         const config = `grant_type=${grantType}&redirect_uri=${redirectUrl}&code=${code}`;
@@ -111,15 +121,26 @@ class StartScreen extends Component {
         //     console.log('auth error', error);
         // }
         let webOAuthUrl = `${authorizationEndpoint}?client_id=${clientId}&redirect_uri=${redirectUrl}&response_type=${responseType}`;
-        NativeModules.AlpacaOAuth.AuthStart(webOAuthUrl).then(url => {
-            console.log('auth result', url);
-            if (url) {
-                this.exchangeToken(url);
-            }
-        })
-        .catch((error) => {
-            console.log('native auth error:', error);
-        });
+        if (Platform.OS === "android") {
+            CustomTabs.openURL(webOAuthUrl, {
+                forceCloseOnRedirection: true
+            }).then((launched) => {
+                console.log(`Launched custom tabs: ${launched}`);
+            }).catch(err => {
+                console.error("custom tab error:" + err);
+            });
+        } else {
+            NativeModules.AlpacaOAuth.AuthStart(webOAuthUrl)
+            .then(url => {
+                console.log('auth result', url);
+                if (url) {
+                    this.exchangeToken(url);
+                }
+            })
+            .catch((error) => {
+                console.log('native auth error:', error);
+            });
+        }
     }
 
     getStarted = () => {
@@ -138,35 +159,35 @@ class StartScreen extends Component {
             <View style={styles.mainContainer}>
                 {
                     accessToken ?
-                    <View style={styles.rowContainer}>
-                        <Text style={styles.label}>
-                            Account
-                        </Text>
-                        <RNPickerSelect
-                            placeholder={{
-                                label: '',
-                                value: null,
-                                color: Colors.COLOR_GOLD,
-                            }}
-                            items={baseUrlItems}
-                            onValueChange={(value) => {
-                                this.setState({
-                                    baseUrl: value,
-                                })
-                            }}
-                            style={pickerSelectStyles}
-                            useNativeAndroidPickerStyle={false}
-                            value={baseUrl}
-                            ref={(el) => {
-                                this.inputRefs.picker = el
-                            }}
+                        <View style={styles.rowContainer}>
+                            <Text style={styles.label}>
+                                Account
+                            </Text>
+                            <RNPickerSelect
+                                placeholder={{
+                                    label: '',
+                                    value: null,
+                                    color: Colors.COLOR_GOLD,
+                                }}
+                                items={baseUrlItems}
+                                onValueChange={(value) => {
+                                    this.setState({
+                                        baseUrl: value,
+                                    })
+                                }}
+                                style={pickerSelectStyles}
+                                useNativeAndroidPickerStyle={false}
+                                value={baseUrl}
+                                ref={(el) => {
+                                    this.inputRefs.picker = el
+                                }}
+                            />
+                        </View> :
+                        <Image
+                            style={styles.logo}
+                            source={Images.logo}
+                            resizeMode="contain"
                         />
-                    </View> :
-                    <Image
-                        style={styles.logo}
-                        source={Images.logo}
-                        resizeMode="contain"
-                    />
                 }
                 <Button
                     style={styles.button}
