@@ -61,7 +61,8 @@ In order to start trading with Alpaca API, please sign up [here](https://alpaca.
 
 - Get client id and secret
 
-You will need to specify client id and secret to run the project.
+You will need to specify client id and secret in `App/config.js` to run the project.
+
 Go to [OAuth Apps](https://app.alpaca.markets/brokerage/apps/manage) and get client id/secret.
 
 ### Disclosures
