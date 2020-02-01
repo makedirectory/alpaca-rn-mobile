@@ -32,7 +32,7 @@ You can find apps on [App store](https://itunes.apple.com/us/app/alpaca-dashboar
 
 - Clone this project
 ```
-git clone < project-url.git >
+git clone https://github.com/alpacahq/alpaca-rn-mobile.git
 ```
 
 - NPM install
