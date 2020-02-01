@@ -33,7 +33,7 @@ class SearchItem extends Component {
                         currentStockPrice = assetItem.todayBar.o
                         preClosePrice = assetItem.preBar.c
                         priceDif = currentStockPrice - preClosePrice
-                        percentage = convert((priceDif/preClosePrice*100).toFixed(2), true)
+                        percentage = convert((priceDif / preClosePrice * 100).toFixed(2), true)
                         plStyle = priceDif >= 0 ? styles.upText : styles.downText
                     }
                 })
@@ -63,7 +63,7 @@ class SearchItem extends Component {
                     </View>
                 </TouchableOpacity>
             )
-        } catch(e) {
+        } catch (e) {
             return null
         }
     }

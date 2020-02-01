@@ -14,7 +14,7 @@ import {
     Fonts
 } from '../../Themes'
 import AssetsActions from '../../Redux/AssetsRedux'
-import { 
+import {
     convert,
     formatValue,
     getTodayStart,
@@ -81,7 +81,7 @@ class SymbolScreen extends Component {
             }
         })
 
-        let filteredOrders = _.map(orders, function(el) {
+        let filteredOrders = _.map(orders, function (el) {
             if (el.symbol === value.symbol) return el
         })
         filteredOrders = _.without(filteredOrders, undefined)

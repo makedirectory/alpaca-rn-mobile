@@ -59,6 +59,11 @@ react-native run-android
 
 In order to start trading with Alpaca API, please sign up [here](https://alpaca.markets/).
 
+- Get client id and secret
+
+You will need to specify client id and secret to run the project.
+Go to [OAuth Apps](https://app.alpaca.markets/brokerage/apps/manage) and get client id/secret.
+
 ### Disclosures
 
 Brokerage services are provided by Alpaca Securities LLC ("Alpaca"), member FINRA/SIPC, a wholly-owned subsidiary of [AlpacaDB, Inc](https://alpaca.markets).

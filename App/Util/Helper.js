@@ -41,7 +41,7 @@ export const changeTimeFormat = (value) => {
 export const mergeArray = (array) => {
     var result = _(array)
         .groupBy(x => x.status)
-        .map((value, key) => ({status: key, data: value}))
+        .map((value, key) => ({ status: key, data: value }))
         .value()
 
     return result
@@ -122,7 +122,7 @@ export const showAlertMessage = (message, type) => {
 export const getYesterdayStart = () => {
     var start = new Date()
     start.setDate(start.getDate() - 1)
-    start.setHours(0,0,0,0)
+    start.setHours(0, 0, 0, 0)
 
     return start.toISOString()
 }
@@ -133,7 +133,7 @@ export const getYesterdayStart = () => {
 export const getYesterdayEnd = () => {
     var end = new Date()
     end.setDate(end.getDate() - 1)
-    end.setHours(23,59,59,999)
+    end.setHours(23, 59, 59, 999)
 
     return end.toISOString()
 }
@@ -143,7 +143,7 @@ export const getYesterdayEnd = () => {
  */
 export const getTodayStart = () => {
     var start = new Date()
-    start.setHours(0,0,0,0)
+    start.setHours(0, 0, 0, 0)
 
     return start.toISOString()
 }
@@ -153,7 +153,7 @@ export const getTodayStart = () => {
  */
 export const getTodayEnd = () => {
     var end = new Date()
-    end.setHours(23,59,59,999)
+    end.setHours(23, 59, 59, 999)
 
     return end.toISOString()
 }

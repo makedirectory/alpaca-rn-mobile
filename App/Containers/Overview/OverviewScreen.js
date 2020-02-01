@@ -82,7 +82,7 @@ class OverviewScreen extends Component {
         let positionDownSum = 0
         let positionDownCount = 0
 
-        source.forEach(function(el) {
+        source.forEach(function (el) {
             if (el.unrealized_intraday_pl >= 0) {
                 positionUpCount++;
                 positionUpSum += parseFloat(el.unrealized_intraday_pl)
@@ -146,7 +146,7 @@ class OverviewScreen extends Component {
         } = this.state
         const positionSum = (positionUpSum + positionDownSum).toFixed(2)
         const positionSumStyle = positionSum >= 0 ? styles.upText : styles.downText
-        const portfolioSumColor = positionSum >= 0 ? Colors.COLOR_GREEN: Colors.COLOR_DARK_RED
+        const portfolioSumColor = positionSum >= 0 ? Colors.COLOR_GREEN : Colors.COLOR_DARK_RED
 
         return (
             <View style={styles.container}>

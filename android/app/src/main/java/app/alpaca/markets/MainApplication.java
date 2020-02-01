@@ -3,6 +3,8 @@ package app.alpaca.markets;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.droibit.android.reactnative.customtabs.CustomTabsPackage;
+import com.rnappauth.RNAppAuthPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
@@ -26,9 +28,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new CustomTabsPackage(),
+            new RNAppAuthPackage(),
             new RNCWebViewPackage(),
             new RNGestureHandlerPackage(),
-            new RNSpinkitPackage()
+            new RNSpinkitPackage(),
+            new AlpacaOAuthPackage()
       );
     }
 

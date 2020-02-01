@@ -16,7 +16,7 @@ const storage = new Storage({
 
     // cache data in the memory. default is true.
     enableCache: true,
-    sync : {
+    sync: {
         // we'll talk about the details later.
     }
 });
