@@ -1,4 +1,5 @@
 import apisauce from 'apisauce'
+import base64 from 'react-native-base64'
 
 import config from '../config'
 
@@ -7,30 +8,33 @@ const create = (baseURL = config.BASE_URL) => {
     const api = apisauce.create({
         baseURL,
         headers: {
-			'APCA-API-KEY-ID': config.APCA_API_KEY_ID,
-			'APCA-API-SECRET-KEY': config.APCA_API_SECRET_KEY,
-		},
+        },
         timeout: 25000
     })
 
     const dataApi = apisauce.create({
         baseURL: config.DATA_BASE_URL,
         headers: {
-			'APCA-API-KEY-ID': config.APCA_API_KEY_ID,
-			'APCA-API-SECRET-KEY': config.APCA_API_SECRET_KEY,
-		},
+        },
         timeout: 50000
     })
 
+    const authApi = apisauce.create({
+        baseURL: config.TOKEN_ENDPOINT,
+        headers: {
+            'content-type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + base64.encode(`${config.AUTH_CLIENT_ID}:${config.AUTH_CLIENT_SECRET}`)
+        },
+        timeout: 25000
+    })
+
     const setBaseURL = url => api.setBaseURL(url)
-    const setHeaders = (apiKey, secretKey) => {
+    const setHeaders = (access_token) => {
         api.setHeaders({
-            'APCA-API-KEY-ID': apiKey,
-            'APCA-API-SECRET-KEY': secretKey,
+            'Authorization': 'Bearer ' + access_token
         })
         dataApi.setHeaders({
-            'APCA-API-KEY-ID': apiKey,
-            'APCA-API-SECRET-KEY': secretKey,
+            'Authorization': 'Bearer ' + access_token
         })
     }
     const getAccount = () => api.get('v2/account')
@@ -41,6 +45,7 @@ const create = (baseURL = config.BASE_URL) => {
     const getPositions = () => api.get('v2/positions')
     const getAssets = () => api.get('v2/assets?status=active')
     const getBars = (timeframe, symbols, start, end) => dataApi.get(`v1/bars/${timeframe}?symbols=${symbols}&limit=2`)
+    const alpacaExchangeToken = (params) => authApi.post(config.TOKEN_ENDPOINT, params)
 
     return {
         setBaseURL,
@@ -52,7 +57,8 @@ const create = (baseURL = config.BASE_URL) => {
         cancelOrder,
         postOrder,
         getAssets,
-        getBars
+        getBars,
+        alpacaExchangeToken,
     }
 }
 

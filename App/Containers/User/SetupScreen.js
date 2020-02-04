@@ -235,7 +235,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-	appStartAttempt: data => dispatch(AppActions.appStartAttempt(data)),
+    appStartAttempt: data => dispatch(AppActions.appStartAttempt(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SetupScreen)

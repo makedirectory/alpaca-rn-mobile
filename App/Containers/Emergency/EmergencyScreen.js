@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {
     View,
     Text,
-    Image,
+    AsyncStorage,
 } from 'react-native'
 import { connect } from 'react-redux'
 import _ from 'lodash'
@@ -32,6 +32,11 @@ class EmergencyScreen extends Component {
         }
     }
 
+    logOut = async () => {
+        await AsyncStorage.removeItem("accessToken");
+        this.props.navigation.push("Setup", { operation: "logout" });
+    }
+
     render() {
         const {
             openOrders,
@@ -47,22 +52,27 @@ class EmergencyScreen extends Component {
                         style={styles.button}
                         color={suspendStatus ? Colors.COLOR_GREEN : Colors.RED}
                         label={suspendStatus ? "RECOVER API" : "SUSPEND API"}
-						onPress={() => this.props.navigation.navigate(suspendStatus ? 'RecoverAPI' : 'SuspendAPI')}
-					/>
+                        onPress={() => this.props.navigation.navigate(suspendStatus ? 'RecoverAPI' : 'SuspendAPI')}
+                    />
                     <Text style={styles.label}>Open Positions: {positions.length}</Text>
                     <Button
                         style={styles.button}
                         label="LIQUIDATE ALL"
                         disabled={positions.length === 0}
-						onPress={() => this.props.navigation.navigate('Liquidation')}
-					/>
+                        onPress={() => this.props.navigation.navigate('Liquidation')}
+                    />
                     <Text style={styles.label}>Open Orders: {openOrders.length}</Text>
                     <Button
                         style={styles.button}
                         label="CANCEL ALL"
                         disabled={openOrders.length === 0}
-						onPress={() => this.props.navigation.navigate('CancelOrder')}
-					/>
+                        onPress={() => this.props.navigation.navigate('CancelOrder')}
+                    />
+                    <Button
+                        style={styles.button}
+                        label="LOG OUT"
+                        onPress={this.logOut}
+                    />
                     <Text
                         style={[styles.label, { marginTop: size(30) }]}
                         onPress={() => this.props.navigation.navigate('Disclosure')}
@@ -88,7 +98,7 @@ const styles = {
     },
     button: {
         marginBottom: size(25),
-	},
+    },
 }
 
 const mapStateToProps = (state) => {

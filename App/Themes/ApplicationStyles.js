@@ -16,8 +16,8 @@ const ApplicationStyles = {
             height: 0,
             backgroundColor: Colors.COLOR_NAV_HEADER,
             justifyContent: 'center',
-            alignItems:'center',
-            flexDirection:'row'
+            alignItems: 'center',
+            flexDirection: 'row'
         },
         navIcon: {
             height: size(27),

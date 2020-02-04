@@ -60,7 +60,7 @@ class PositionScreen extends Component {
             </View>
         )
     }
-   
+
 }
 
 const styles = {
