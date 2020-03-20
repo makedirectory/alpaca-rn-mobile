@@ -55,10 +55,6 @@ react-native run-ios
 react-native run-android
 ```
 
-- Get API Key
-
-In order to start trading with Alpaca API, please sign up [here](https://alpaca.markets/).
-
 - Get client id and secret
 
 You will need to specify client id and secret in `App/config.js` to run the project.
