@@ -35,7 +35,7 @@ You can find apps on [App store](https://itunes.apple.com/us/app/alpaca-dashboar
 git clone https://github.com/alpacahq/alpaca-rn-mobile.git
 ```
 
-- NPM install
+- Install dependencies
 ```
 npm install
 ```
@@ -57,9 +57,10 @@ react-native run-android
 
 - Get client id and secret
 
-You will need to specify client id and secret in `App/config.js` to run the project.
+You will need to specify client id and secret in `App/config.js` to get the app working.
 
 Go to [OAuth Apps](https://app.alpaca.markets/brokerage/apps/manage) and get client id/secret.
+ (The redirect url should be `alpacamobile://oauth`)
 
 ### Disclosures
 
