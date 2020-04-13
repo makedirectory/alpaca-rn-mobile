@@ -7,13 +7,14 @@ import {
   Linking,
   Platform,
   NativeModules,
+  AsyncStorage
 } from 'react-native';
 import {connect} from 'react-redux';
 import {authorize} from 'react-native-app-auth';
 import RNPickerSelect from 'react-native-picker-select';
 import {CustomTabs} from 'react-native-custom-tabs';
 // import base64 from 'react-native-base64'
-import {AsyncStorage} from '@react-native-community/async-storage';
+//import {AsyncStorage} from '@react-native-community/async-storage';
 
 import AppActions from '../../Redux/AppRedux';
 import {ApplicationStyles, Colors, Images} from '../../Themes';

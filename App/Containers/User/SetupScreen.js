@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {View, Text, TextInput, StyleSheet, Linking} from 'react-native';
+import {View, Text, TextInput, StyleSheet, Linking, AsyncStorage} from 'react-native';
 import {connect} from 'react-redux';
 import RNPickerSelect from 'react-native-picker-select';
 import CheckBox from 'react-native-check-box';
-import {AsyncStorage} from '@react-native-community/async-storage';
+//import {AsyncStorage} from '@react-native-community/async-storage';
 
 import AppActions from '../../Redux/AppRedux';
 import {ApplicationStyles, Colors, Fonts} from '../../Themes';
