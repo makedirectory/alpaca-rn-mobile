@@ -12,7 +12,7 @@ import Button from '../../Components/Button';
 import NavigationIcon from '../../Components/NavigationIcon';
 
 class EmergencyScreen extends Component {
-  static navigationOptions = props => {
+  static navigationOptions = (props) => {
     return {
       headerRight: (
         <NavigationIcon
@@ -87,7 +87,7 @@ const styles = {
   },
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     account: state.account.account,
     cancelingOrder: state.orders.cancelingOrder,
@@ -98,11 +98,8 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {};
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(EmergencyScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(EmergencyScreen);

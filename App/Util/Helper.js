@@ -8,7 +8,7 @@ const {width} = Dimensions.get('window');
 /**
  * Recalculate size based on screen resolution
  */
-export const size = size => {
+export const size = (size) => {
   let normalWidth;
   if (Platform.OS === 'ios') {
     normalWidth = Platform.isPad ? 768 : 375;
@@ -23,25 +23,23 @@ export const size = size => {
 /**
  * Capitalize first character of string
  */
-export const capitalize = str => {
+export const capitalize = (str) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 };
 
 /**
  * Change time format in New York timezone
  */
-export const changeTimeFormat = value => {
-  return moment(value)
-    .tz('America/New_York')
-    .format('MM/D h:mm a z');
+export const changeTimeFormat = (value) => {
+  return moment(value).tz('America/New_York').format('MM/D h:mm a z');
 };
 
 /**
  * Group array by `status` key
  */
-export const mergeArray = array => {
+export const mergeArray = (array) => {
   var result = _(array)
-    .groupBy(x => x.status)
+    .groupBy((x) => x.status)
     .map((value, key) => ({status: key, data: value}))
     .value();
 
@@ -60,17 +58,23 @@ export const convert = (value, percent = false) => {
   if (value > 0) {
     if (!percent) {
       return `+$${value}`;
-    } else return `+${value}%`;
+    } else {
+      return `+${value}%`;
+    }
   } else if (value < 0) {
     value = Math.abs(value);
     value = value.toFixed(2);
     if (!percent) {
       return `-$${value}`;
-    } else return `-${value}%`;
+    } else {
+      return `-${value}%`;
+    }
   } else {
     if (!percent) {
       return `$${value}`;
-    } else return `${value}%`;
+    } else {
+      return `${value}%`;
+    }
   }
 };
 
@@ -78,7 +82,7 @@ export const convert = (value, percent = false) => {
  * Convert to float, round 2 decimals and add commma every 3 digits
  * return example: 1,256,23.56
  */
-export const formatValue = value => {
+export const formatValue = (value) => {
   if (Platform.OS === 'ios') {
     return parseFloat(value).toLocaleString(undefined, {
       minimumFractionDigits: 2,
@@ -93,7 +97,7 @@ export const formatValue = value => {
 /**
  * Add comma every 3 digits
  */
-export const commafy = num => {
+export const commafy = (num) => {
   var str = num.toString().split('.');
   if (str[0].length >= 5) {
     str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');

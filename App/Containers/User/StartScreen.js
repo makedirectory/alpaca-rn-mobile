@@ -53,7 +53,7 @@ class StartScreen extends Component {
   async componentDidMount() {
     const operation = this.props.navigation.getParam('operation');
     if (Platform.OS === 'android' && operation !== 'logout') {
-      Linking.getInitialURL().then(url => {
+      Linking.getInitialURL().then((url) => {
         this.exchangeToken(url);
       });
     }
@@ -75,9 +75,11 @@ class StartScreen extends Component {
     }
   }
 
-  exchangeToken = url => {
+  exchangeToken = (url) => {
     console.log('url:', url);
-    if (!url) return;
+    if (!url) {
+      return;
+    }
     const {redirectUrl, grantType} = this.state;
     const code = this.getCode(url);
     const config = `grant_type=${grantType}&redirect_uri=${redirectUrl}&code=${code}`;
@@ -85,7 +87,7 @@ class StartScreen extends Component {
     this.props.alpacaExchangeToken(config);
   };
 
-  getCode = url => {
+  getCode = (url) => {
     let codeIndex = url.indexOf('code');
     let code = url.slice(codeIndex + 5);
     return code;
@@ -128,21 +130,21 @@ class StartScreen extends Component {
       CustomTabs.openURL(webOAuthUrl, {
         forceCloseOnRedirection: true,
       })
-        .then(launched => {
+        .then((launched) => {
           console.log(`Launched custom tabs: ${launched}`);
         })
-        .catch(err => {
+        .catch((err) => {
           console.error('custom tab error:' + err);
         });
     } else {
       NativeModules.AlpacaOAuth.AuthStart(webOAuthUrl)
-        .then(url => {
+        .then((url) => {
           console.log('auth result', url);
           if (url) {
             this.exchangeToken(url);
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.log('native auth error:', error);
         });
     }
@@ -172,7 +174,7 @@ class StartScreen extends Component {
                 color: Colors.COLOR_GOLD,
               }}
               items={baseUrlItems}
-              onValueChange={value => {
+              onValueChange={(value) => {
                 this.setState({
                   baseUrl: value,
                 });
@@ -180,7 +182,7 @@ class StartScreen extends Component {
               style={pickerSelectStyles}
               useNativeAndroidPickerStyle={false}
               value={baseUrl}
-              ref={el => {
+              ref={(el) => {
                 this.inputRefs.picker = el;
               }}
             />
@@ -245,17 +247,15 @@ const pickerSelectStyles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   fetching: state.app.fetching,
   accessToken: state.app.accessToken,
 });
 
-const mapDispatchToProps = dispatch => ({
-  appStartAttempt: data => dispatch(AppActions.appStartAttempt(data)),
-  alpacaExchangeToken: data => dispatch(AppActions.exchangeTokenAttempt(data)),
+const mapDispatchToProps = (dispatch) => ({
+  appStartAttempt: (data) => dispatch(AppActions.appStartAttempt(data)),
+  alpacaExchangeToken: (data) =>
+    dispatch(AppActions.exchangeTokenAttempt(data)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(StartScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(StartScreen);

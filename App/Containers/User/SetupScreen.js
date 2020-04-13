@@ -83,7 +83,7 @@ class SetupScreen extends Component {
 
   openURL = () => {
     const signUpUrl = 'https://app.alpaca.markets/signup';
-    Linking.canOpenURL(signUpUrl).then(supported => {
+    Linking.canOpenURL(signUpUrl).then((supported) => {
       if (supported) {
         Linking.openURL(signUpUrl);
       } else {
@@ -101,7 +101,7 @@ class SetupScreen extends Component {
           <Text style={styles.label}>APCA_API_KEY_ID</Text>
           <TextInput
             style={styles.inputText}
-            onChangeText={text => this.setState({apiKey: text})}
+            onChangeText={(text) => this.setState({apiKey: text})}
             value={apiKey}
             autoCorrect={false}
             underlineColorAndroid="transparent"
@@ -112,7 +112,7 @@ class SetupScreen extends Component {
           <Text style={styles.label}>APCA_API_SECRET_KEY</Text>
           <TextInput
             style={styles.inputText}
-            onChangeText={text => this.setState({secretKey: text})}
+            onChangeText={(text) => this.setState({secretKey: text})}
             value={secretKey}
             autoCorrect={false}
             underlineColorAndroid="transparent"
@@ -128,7 +128,7 @@ class SetupScreen extends Component {
               color: Colors.COLOR_GOLD,
             }}
             items={baseUrlItems}
-            onValueChange={value => {
+            onValueChange={(value) => {
               this.setState({
                 baseUrl: value,
               });
@@ -136,7 +136,7 @@ class SetupScreen extends Component {
             style={pickerSelectStyles}
             useNativeAndroidPickerStyle={false}
             value={baseUrl}
-            ref={el => {
+            ref={(el) => {
               this.inputRefs.picker = el;
             }}
           />
@@ -216,13 +216,10 @@ const pickerSelectStyles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
-const mapDispatchToProps = dispatch => ({
-  appStartAttempt: data => dispatch(AppActions.appStartAttempt(data)),
+const mapDispatchToProps = (dispatch) => ({
+  appStartAttempt: (data) => dispatch(AppActions.appStartAttempt(data)),
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(SetupScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(SetupScreen);
