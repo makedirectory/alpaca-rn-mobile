@@ -15,15 +15,15 @@ class TradeReviewScreen extends Component {
     submitted: false,
   };
 
-  static navigationOptions = (props) => {
+  static navigationOptions = props => {
     const submitted = props.navigation.getParam('submitted');
     return {
       headerLeft: submitted ? null : (
         <NavigationIcon
           onPress={() => props.navigation.pop()}
           source={Images.back}
-        />,
-      ),
+        />
+      )
     };
   };
 
@@ -153,15 +153,18 @@ const styles = {
   },
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     postingOrder: state.orders.postingOrder,
     orderResult: state.orders.orderResult,
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  postOrder: (data) => dispatch(OrdersActions.postOrderAttempt(data, 'single')),
+const mapDispatchToProps = dispatch => ({
+  postOrder: data => dispatch(OrdersActions.postOrderAttempt(data, 'single')),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TradeReviewScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(TradeReviewScreen);

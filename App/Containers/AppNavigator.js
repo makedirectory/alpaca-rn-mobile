@@ -129,15 +129,15 @@ const TabStack = createBottomTabNavigator(
         let IconComponent;
         if (routeName === 'Overview') {
           IconComponent = (
-            <TabImage source={Images.overview} isSelected={focused} />;
+            <TabImage source={Images.overview} isSelected={focused} />
           );
         } else if (routeName === 'Positions') {
           IconComponent = (
-            <TabImage source={Images.positions} isSelected={focused} />;
+            <TabImage source={Images.positions} isSelected={focused} />
           );
         } else if (routeName === 'Orders') {
           IconComponent = (
-            <TabImage source={Images.orders} isSelected={focused} />;
+            <TabImage source={Images.orders} isSelected={focused} />
           );
         } else if (routeName === 'Emergency') {
           IconComponent = (

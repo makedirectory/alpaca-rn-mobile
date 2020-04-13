@@ -82,8 +82,8 @@ class TradeScreen extends Component {
         <NavigationIcon
           onPress={() => props.navigation.pop()}
           source={Images.back}
-        />,
-      ),
+        />
+      )
     };
   };
 
